@@ -1,10 +1,10 @@
-# SourceFlow Page Builder Integration
+# SourceFlow Page Builder README
 
 This guide explains how to integrate your project with the SourceFlow Page Builder, including setup, usage, and best practices.
 
 ## Table of Contents
 
-- [SourceFlow Page Builder Integration](#sourceflow-page-builder-integration)
+- [SourceFlow Page Builder README](#sourceflow-page-builder-readme)
   - [Table of Contents](#table-of-contents)
   - [Concept](#concept)
   - [1. Setup](#1-setup)
