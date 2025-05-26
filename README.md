@@ -1,12 +1,12 @@
 <div align="center">
-  <a href="[https://github.com/sourceflow-uk/page-builder-readme](https://github.com/sourceflow-uk/page-builder-readme/)">
+  <a href="https://github.com/sourceflow-uk/page-builder-readme/">
     <img src="https://github.com/user-attachments/assets/626e049f-6030-4726-909a-a4305346d2c6" alt="SourceFlow Page Builder Logo" width="300" height="300">
   </a>
 
   <h3 align="center">SourceFlow Page Builder</h3>
 
   <p align="center">
-    An internal meta-programming layer for Next.js sites to be constructible via the CMS
+    An internal framework for Next.js sites to be dynamically constructible via the CMS
     <br />
     <a href="https://github.com/sourceflow-uk/page-builder-readme/"><strong>Explore the docs »</strong></a>
   </p>
