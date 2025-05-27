@@ -33,6 +33,7 @@ This guide explains how to integrate your project with the SourceFlow Page Build
       - [Prop Default Values Example](#prop-default-values-example)
       - [Prop Supported Types](#prop-supported-types)
       - [Example for Nested Templates and Objects](#example-for-nested-templates-and-objects)
+      - [Full example of a `definitions.sourceflow.mjs` file](#full-example-of-a-definitionssourceflowmjs-file)
     - [Using `sfgenerate` to generate scaffold files](#using-sfgenerate-to-generate-scaffold-files)
   - [3. Creating the Components Page](#3-creating-the-components-page)
     - [Key Requirements](#key-requirements)
@@ -232,6 +233,7 @@ Each prop in `propSchema` can have the following fields:
 | `template_schema`                | Yes (if `type: template`) | Defines fields for nested templates                                 | See example below                                                |
 | `object_schema`                  | Yes (if `type: object`)   | Defines fields for nested objects                                   | See example below                                                |
 | `defaultValue`                   | No                        | Default value for the field                                         | See [Default Values Example](#prop-default-values-example) below |
+| `category_internal_build_name`   | No                        | Internal build name for the category (snake_case)                   | `"testimonials"`                                                 |
 | `category_id`                    | No                        | ID of the category that you want to link this prop to (UUID string) | `"cb62ab14-dfac-43f6-89ab-a283445584a4"`                         |
 | `allowMultipleOptions`           | No                        | Allow multiple options (for `array` or `category_id`)               | `true` / `false`                                                 |
 | `options`                        | No                        | Options for select fields                                           | `[ { label: "A", value: "A" } ]`                                 |
@@ -326,6 +328,182 @@ export default {
         },
       ],
       isRequired: false,
+    },
+  ],
+};
+```
+
+#### Full example of a `definitions.sourceflow.mjs` file
+
+```js
+export default {
+  component: 'ExampleComponent',
+  label: 'Example Component',
+  component_category: 'default',
+  propSchema: [
+    { name: 'title', label: 'title', type: 'string', defaultValue: 'Hello world!' },
+    {
+      name: 'description',
+      label: 'description',
+      type: 'formatted_text',
+    },
+    { name: 'buttonText', bs_col_width: 4, type: 'string', defaultValue: 'Click me!', isRequired: true },
+    {
+      name: 'buttonClass',
+      bs_col_width: 4,
+      type: 'string',
+      defaultValue: '',
+      options: [
+        {
+          label: 'Primary',
+          value: 'btn-primary',
+        },
+        {
+          label: 'Secondary',
+          value: 'btn-secondary',
+        },
+        {
+          label: 'Danger',
+          value: 'btn-danger',
+        },
+      ],
+      allowMultipleOptions: false,
+      isRequired: true,
+    },
+    {
+      name: 'sponsors',
+      type: 'repeater',
+    },
+    {
+      name: 'icon',
+      label: 'icon',
+      type: 'file',
+    },
+    { name: 'myRandomNameForModuleID', type: 'modules' },
+    {
+      name: 'template',
+      type: 'template',
+      template_item_label: 'Module Items',
+      template_schema: [
+        {
+          label: 'Field1',
+          name: 'field1',
+          category_id: 'cb62ab14-dfac-43f6-89ab-a283445584a4',
+          allowMultipleOptions: true, // Allow multiple category values to be selected
+        },
+        {
+          label: 'Field2Module',
+          name: 'field2Module',
+          type: 'modules',
+        },
+      ],
+    },
+    {
+      name: 'massive_object_one',
+      label: 'massive_object_one',
+      type: 'object',
+      object_schema: [
+        {
+          label: 'Field 1',
+          name: 'image1',
+          type: 'file',
+          defaultValue: {
+            id: '32248875-332a-4111-8a1c-f5e1a3752936',
+          },
+        },
+      ],
+    },
+    {
+      name: 'massive_object_two',
+      label: 'massive_object_two',
+      type: 'object',
+
+      object_schema: [
+        {
+          label: 'Field 1',
+          name: 'image1',
+          type: 'file',
+          defaultValue: {
+            id: '32248875-332a-4111-8a1c-f5e1a3752936',
+          },
+        },
+      ],
+    },
+    {
+      name: 'massive_object_three',
+      label: 'massive_object_three',
+      type: 'object',
+      object_schema: [
+        {
+          label: 'Field 1',
+          name: 'image1',
+          type: 'file',
+          defaultValue: { url: 'https://placehold.co/300' },
+        },
+      ],
+    },
+    {
+      name: 'blogs',
+      label: 'blogs',
+      type: 'template',
+      template_item_label: 'Blog',
+      template_schema: [
+        {
+          label: 'Field0 - Repeater',
+          name: 'Field0-Repeater',
+          type: 'repeater',
+        },
+        {
+          label: 'Field1',
+          name: 'field1',
+          category_id: 'cb62ab14-dfac-43f6-89ab-a283445584a4',
+          allowMultipleOptions: true,
+          type: 'string',
+          defaultValue: 'Hello world!',
+        },
+        {
+          label: 'Field2',
+          name: 'field2',
+          type: 'number',
+          defaultValue: 0,
+        },
+        {
+          label: 'Field3',
+          name: 'field3',
+          type: 'boolean',
+          defaultValue: false,
+        },
+        {
+          label: 'Field4',
+          name: 'field4',
+          type: 'array',
+          options: [],
+          defaultValue: [],
+        },
+        {
+          label: 'Field5',
+          name: 'field5',
+          type: 'file',
+        },
+        {
+          label: 'Field6',
+          name: 'field6',
+          type: 'formatted_text',
+          defaultValue: '',
+        },
+        {
+          label: 'Field 7',
+          name: 'field7',
+          type: 'object',
+          object_schema: [{ label: 'Field 7.1', name: 'field7.1', type: 'string', defaultValue: 'Hello world!' }],
+        },
+        {
+          label: 'Field 8',
+          name: 'field8',
+          type: 'template',
+          template_schema: [{ label: 'Field 8. name', name: 'name', type: 'string', defaultValue: 'Hello world!' }],
+        },
+      ],
     },
   ],
 };
